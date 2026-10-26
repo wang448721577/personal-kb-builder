@@ -1,0 +1,128 @@
+home: D:/PersonalKB
+root: D:/MyDocuments   # 改成你要索引的资料根目录
+
+# 为空表示扫描 root 下全部目录，再按 exclude_dirs 排除
+include_dirs: []
+exclude_dirs:
+  - 微信QQ等软件聊天记录
+  - 智能体软件保存文件目录
+  - 软件-所有安装包
+  - 桌面布局备份
+  - 软件图标-所有
+  - 小米电脑手机互传
+  - 腾讯会议_ev录屏等文件
+  - 有道云笔记的保存和缓存
+  - .stfolder
+  - $RECYCLE.BIN
+  - System Volume Information
+  - node_modules
+  - .git
+  - __pycache__
+  - .venv
+  - venv
+
+max_doc_mb: 800
+max_media_mb: 3000
+max_image_mb: 100
+workers: 6
+legacy_workers: 2
+commit_every: 40
+rescan_hours: 6
+watch_debounce: 5
+# true：源文件被删除后，知识库保留已索引的记录（不再自动删除）
+keep_deleted: true
+# 自动任务（守护/监听/OCR/向量化/截图回退等）合计 CPU 上限（占整机百分比）；0=不限制
+# 智能体检索/读取（MCP/HTTP/CLI）不受此限制
+background_cpu_percent: 10
+# GPU / NPU 后台占用上限（时间占比，百分比）
+gpu_percent: 10
+npu_percent: 10
+
+ocr:
+  enabled: true
+  # 设备：cpu / gpu / npu（实测 CPU 最快；改这里即可换设备）
+  device: cpu
+  min_chars_page: 40
+  dpi: 170
+  max_pages: 0
+  max_pixels: 30000000
+  images: true
+  embedded_images: false
+  threads: 4
+
+audio:
+  enabled: false
+  # 转写设备：gpu（whisper Vulkan）或 cpu（faster-whisper）
+  device: gpu
+  model: small
+  language: zh
+  compute_type: int8
+  max_duration_min: 240
+  vad: true
+
+embedding:
+  enabled: true
+  # 嵌入设备：npu / cpu / gpu
+  device: npu
+  model: BAAI/bge-small-zh-v1.5
+  batch_size: 32
+  threads: 16
+  max_chars: 1000
+  start_delay_sec: 30
+  dim: 512
+  query_prefix: "为这个句子生成表示以用于检索相关文章："
+
+search:
+  chunk_chars: 800
+  overlap_chars: 120
+  max_chunk_chars: 3000
+  top_k: 10
+  candidate_k: 40
+  rrf_k: 60
+  rerank: false
+  max_chunks_per_doc: 3
+
+tables:
+  export: true
+  max_rows_text: 200
+  max_table_rows: 500000
+
+server:
+  host: 127.0.0.1
+  port: 8765
+  api_port: 8766
+  api_token: ""
+
+screenpipe:
+  enabled: true
+  base_url: http://127.0.0.1:3030
+  token: ''   # 换成你本机 Screenpipe 的 token（可选模块）
+  data_dir: D:/PersonalKB/screenpipe
+  bucket_minutes: 5
+  lookback_minutes: 15
+  poll_seconds: 300
+  retention_days: 0
+  exclude_apps:
+    - weixin
+    - wechat
+    - qq
+    - 1password
+    - bitwarden
+    - keepass
+    - authenticator
+    - 支付宝
+    - 网上银行
+
+wechat:
+  enabled: true
+  full_history: true
+  recent_limit: 300
+  max_messages_per_session: 100000
+  exclude_prefixes:
+    - gh_
+    - brandsessionholder
+  exclude_chats: []
+  poll_minutes: 30
+
+caj:
+  auto_convert: false
