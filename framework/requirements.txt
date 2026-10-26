@@ -1,0 +1,25 @@
+# 个人知识库框架依赖（Python 3.11+，Windows）
+pyyaml
+watchdog
+psutil
+Pillow
+jieba
+numpy
+pyarrow
+pymupdf>=1.24
+lancedb
+fastembed
+onnxruntime-directml>=1.24        # Windows 提供 DML（GPU/NPU）；macOS/Linux 换 onnxruntime
+rapidocr>=3.10
+python-docx
+openpyxl
+python-pptx
+duckdb
+fastapi
+uvicorn
+mcp>=1.2
+pystray                          # 仅屏幕记忆托盘需要
+# --- 可选模块 ---
+# wechat: 由个人知识库技能按需安装 wechatauto 只读解密依赖
+# 转写 CPU: faster-whisper  + av
+# 转写 GPU: 需另下 whisper-gpu CLI 与 ggml 模型（见 references/hardware.md）
